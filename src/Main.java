@@ -1,5 +1,4 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.*;
 public class Main {
 
     // 1143. Longest Common Subsequence
@@ -107,6 +106,86 @@ public class Main {
         }
 
         return result.reverse().toString();
+    }
+
+    //989. Add to Array-Form of Integer
+    // Solution 1. I converted K to array
+    public List<Integer> addToArrayForm(int[] num, int k) {
+        int p1 = num.length - 1;
+        int[] num2 = numberToArray(k);
+        int p2 = num2.length - 1;
+
+        int carry = 0;
+
+        ArrayList<Integer> result = new ArrayList<>();
+
+        while(p1 >= 0 || p2 >= 0) {
+            int x1 = p1 >= 0 ? num[p1] - 0: 0;
+            int x2 = p2 >= 0 ? num2[p2] - 0: 0;
+
+            int sum = x1 + x2 + carry;
+
+            carry = sum / 10;
+            sum = sum % 10;
+
+            result.add(sum);
+            p1--;
+            p2--;
+        }
+
+        if(carry != 0) {
+            result.add(carry);
+        }
+
+        return reverse(result);
+    }
+
+    public static int[] numberToArray(int number) {
+        String numberString = String.valueOf(number);
+
+        int[] digitArray = new int[numberString.length()];
+
+        for (int i = 0; i < numberString.length(); i++) {
+            digitArray[i] = Character.getNumericValue(numberString.charAt(i));
+        }
+
+        return digitArray;
+    }
+
+    public static List reverse(ArrayList<Integer> list) {
+        int size = list.size();
+        int lastIndex = size - 1;
+
+        for (int i = 0; i < size / 2; i++) {
+            int temp = list.get(i);
+            list.set(i, list.get(lastIndex - i));
+            list.set(lastIndex - i, temp);
+        }
+
+        return list;
+    }
+
+    //solution 2
+    public List<Integer> addToArrayForm1(int[] num, int k) {
+        int p1 = num.length - 1;
+        int carry = 0;
+        ArrayList<Integer> result = new ArrayList<>();
+
+        while(p1 >= 0 || k > 0 || carry > 0) {
+            int x1 = p1 >= 0 ? num[p1] : 0;
+            int x2 = k % 10;
+
+            int sum = x1 + x2 + carry;
+            result.add(sum % 10);
+
+            carry = sum / 10;
+
+            p1--;
+            k /= 10;
+        }
+
+        Collections.reverse(result);
+        return result;
     }
 }
 

@@ -226,5 +226,34 @@ public class Main {
 
         return j;
     }
+
+    //    2460. Apply Operations to an Array
+    public int[] applyOperations(int[] nums) {
+        if(nums.length <= 1) {
+            return nums;
+        }
+
+        for (int i = 0; i < nums.length -1; i++) {
+            if(nums[i] == nums[i + 1]) {
+                nums[i] *= 2;
+                nums[i+1] = 0;
+                i++;
+            }
+        }
+
+        //move 0's to the end
+        int i = 0;
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j] != 0) {
+                nums[i++] = nums[j];
+            }
+        }
+
+        // Fill remaining slots with zeros
+        while (i < nums.length) {
+            nums[i++] = 0;
+        }
+        return nums;
+    }
 }
 

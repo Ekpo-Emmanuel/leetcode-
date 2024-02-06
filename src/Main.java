@@ -187,5 +187,44 @@ public class Main {
         Collections.reverse(result);
         return result;
     }
+
+    //    26. Remove Duplicates from Sorted Array
+    //    Solution 1
+    public int removeDuplicates(int[] nums) {
+         int length = nums.length;
+         ArrayList<Integer> result = new ArrayList<>();
+         result.add(nums[0]);
+
+         if(nums.length <= 1)
+             return length;
+
+         int count = 1;
+
+         for(int i = 1; i < length; i++) {
+             if(nums[i] != nums[i-1]) {
+                 result.add(nums[i]);
+                 count++;
+             }
+         }
+
+         for (int i = 0; i < count; i++) {
+             nums[i] = result.get(i);
+         }
+
+         return count;
+     }
+    //solution2
+    public int removeDuplicates2(int[] nums) {
+        if(nums.length == 0) return 0;
+
+        int j = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[i-1]){
+                nums[j++] = nums[i];
+            }
+        }
+
+        return j;
+    }
 }
 

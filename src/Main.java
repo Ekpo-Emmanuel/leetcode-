@@ -269,5 +269,43 @@ public class Main {
             nums[j++] = 0;
         }
     }
+    
+    //    80. Remove Duplicates from Sorted Array II
+    public int removeDuplicates1(int[] nums) {
+        int i = 1;
+        int j = 1;
+
+        int count = 1;
+        while (i < nums.length) {
+            if(nums[i] == nums[i-1]) {
+                count++;
+            } else {
+                count = 1;
+            }
+
+            if(count <= 2) {
+                nums[j++] = nums[i];
+            }
+
+            i++;
+        }
+
+        return j;
+
+    }
+    //    solution 2
+    public int removeDuplicates3(int[] nums) {
+    int n = nums.length;
+    if (n <= 1) {return n;}
+
+    int j = 2;
+    for(int i = 2; i < n; i++) {
+        if (nums[i] != nums[j-1] || nums[i] != nums[j-2]) {
+            nums[j++] = nums[i];
+        }
+    }
+
+    return j;
+}
 }
 

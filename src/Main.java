@@ -392,5 +392,58 @@ public class Main {
 
         return count;
     }
+
+
+    // 543. Diameter of Binary Tree
+    public class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode() {}
+      TreeNode(int val) { this.val = val; }
+      TreeNode(int val, TreeNode left, TreeNode right) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+        }
+     }
+    class Solution {
+
+        //Performing a DFS to traverse the list. Either Inorder, Preorder or Postorder
+        public void inorder(TreeNode node) {
+            if (node == null) return;
+            else {
+                inorder(node.left);
+                System.out.print(node.val);
+                inorder(node.right);
+            }
+        }
+
+        //Find the maxDepth of the tree (height of tree)
+        public int height (TreeNode node) {
+            if (node == null) return 0;
+            else {
+                int lheight = height(node.left);
+                int rheight = height(node.right);
+
+                return Math.max(lheight, rheight) + 1;
+            }
+        }
+        //main Function
+        public int diameterOfBinaryTree(TreeNode root) {
+            if (root == null) return 0;
+
+            //keeps track of the current left and right node
+            int lheight = height(root.left);
+            int rheight = height(root.right);
+
+            int currDiameter = lheight + rheight;
+            int lDiameter = diameterOfBinaryTree(root.left);
+            int rDiameter = diameterOfBinaryTree(root.right);
+
+            return Math.max(currDiameter, Math.max(lDiameter, rDiameter));
+
+        }
+    }
 }
 

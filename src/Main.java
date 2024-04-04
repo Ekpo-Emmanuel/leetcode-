@@ -498,6 +498,35 @@ public class Main {
             return dummy.next;
 
         }
+        // 2095. Delete the Middle Node of a Linked List
+        public ListNode deleteMiddle(ListNode head) {
+            //getting the total items in list
+            int count = 0;
+            ListNode temp = head;
+
+            while(temp != null) {
+                count++;
+                temp = temp.next;
+            }
+
+            //middle
+            int middle = count / 2;
+
+            //pointers
+            ListNode dummy = new ListNode(0, head);
+            ListNode left = dummy;
+            ListNode right = head;
+
+            //moving right by n+1
+            for(int i = 0; i < middle; i++) {
+                if(right == null) return null;
+                left = left.next;
+                right = right.next;
+            }
+
+            left.next = left.next.next;
+            return dummy.next;
+        }
     }
 }
 

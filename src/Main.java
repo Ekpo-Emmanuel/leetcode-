@@ -475,6 +475,29 @@ public class Main {
 
             return arr;
         }
+
+        // 19. Remove Nth Node From End of List
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            ListNode dummy = new ListNode(0,head);
+            ListNode left = dummy;
+            ListNode right = head;
+
+            //moving right by n+1
+            for(int i =0; i < n; i++) {
+                if(right == null) return null;
+                right = right.next;
+            }
+
+            //moving both pointers
+            while(n > 0 && right != null) {
+                left = left.next;
+                right = right.next;
+            }
+
+            left.next = left.next.next;
+            return dummy.next;
+
+        }
     }
 }
 

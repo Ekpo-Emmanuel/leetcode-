@@ -527,6 +527,25 @@ public class Main {
             left.next = left.next.next;
             return dummy.next;
         }
+        // 11. Container With Most Water
+        public int maxArea(int[] height) {
+            int i = 0;
+            int j = height.length - 1;
+            int max = 0;
+
+            while (i <= j) {
+                int area = Math.min(height[i], height[j]) * Math.abs(j - i);
+                max = Math.max(max, area);
+
+                if(height[i] < height[j]) {
+                    i++;
+                } else {
+                    j--;
+                }
+            }
+
+            return max;
+        }
     }
 }
 
